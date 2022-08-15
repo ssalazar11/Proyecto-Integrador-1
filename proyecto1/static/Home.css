@@ -1,0 +1,142 @@
+html, body{
+    margin: 0px
+}
+
+nav{
+    background-color: rgba(32, 32, 32, 0.705);
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    padding: 0px;
+}
+
+#title{
+    
+    margin: 15px;
+    height: 60px;
+    color:rgb(233, 218, 198);
+    font-size: 40px;
+    text-align: center;
+    justify-content: center;
+}
+
+#nav-title{
+    box-shadow: -3px 5px 7px -3px black ;
+    height: 80px;
+}
+
+.Nav-Op{
+    box-shadow: -3px 2px 7px -3px black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.Op:hover{
+    color:rgb(255, 255, 255);
+}
+
+.Op{
+    color:rgb(207, 207, 207);
+    margin-left: 10px;
+}
+
+.iconos-nav{
+    color:white;
+    font-size: 20px;
+}
+
+main{
+    margin-left: 300px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    opacity: 0.8;
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
+    background-size: 10px 10px;
+}
+
+#TituloSeccion{
+    margin: 0px 0px 0px 15px;
+    height: 60px;
+    position: relative;
+    top: 6px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header{
+    height: 80px;
+    box-shadow: -3px 5px 7px -3px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    background-color: white;
+}
+
+#Destacados{
+   margin-top: 15px;
+    width: 100%;
+    margin-bottom: 60px;
+
+}
+
+#items{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.product{
+    width:350px;
+}
+
+.ItemDestacado{
+    margin: 0 60px 0 50px;
+}
+
+.title{
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+
+#Pro-Title{
+    margin-left:10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#Pro-Items{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    justify-content: center;
+    align-items: center;
+    row-gap: 60px;
+}
+
+.Item{
+    margin: 0 50px 0 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+.Cantidad{
+    padding: 10px 10px 10px 10px;
+    display:inline-block;
+    font-size: 15px;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+hr{
+   width: 40%;
+   margin: 10px;
+   background: linear-gradient(to right, black, white);
+   height: 1px;
+   border: none;
+}

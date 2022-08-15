@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from inventario import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", views.Index, name = "index"),
+    path("Home/", views.Home, name = "Home"),
+    path("Registro/", views.Registro, name = "Registro"),
+    path("Ingreso/", views.Ingreso, name = "Ingreso"),
+    path("Logout/", views.logOut_request, name = "logout")
 ]

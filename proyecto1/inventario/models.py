@@ -8,10 +8,10 @@ class usuario(models.Model):
     usuario=models.CharField(max_length=30, null=True)
     correo=models.CharField(max_length=30, null=True)
     constraseña=models.CharField(max_length=20, null=True)
-    nombreCompania=models.CharField(max_length=60, null=True)
+    nombreCompania=models.OneToOneField(compania, on_delete=models.CASCADE, primary_key=True)
 
 class compania(models.Model):
-    nombreCompania=models.OneToOneField(usuario, on_delete=models.CASCADE, primary_key=True)
+    nombreCompania=models.CharField(max_length=50, null=True)
 
 class producto(models.Model):
     nombreProducto=models.CharField(max_length=60, null=True)

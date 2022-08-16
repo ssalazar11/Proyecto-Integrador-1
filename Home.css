@@ -1,9 +1,14 @@
 html, body{
-    margin: 0px
+    margin: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
+    
 }
 
 nav{
-    background-color: rgba(32, 32, 32, 0.705);
+    background-color: rgb(99, 95, 95);
     width: 300px;
     height: 100%;
     position: fixed;
@@ -62,8 +67,6 @@ main{
     margin-top: 0px;
     margin-bottom: 0px;
     opacity: 0.8;
-    background-color: #ffffff;
-    background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
     background-size: 10px 10px;
 }
 

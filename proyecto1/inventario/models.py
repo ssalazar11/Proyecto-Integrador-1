@@ -1,10 +1,9 @@
 from django.db import models
 
 # Create your models here.
-
-
 class compania(models.Model):
     nombreCompania=models.CharField(max_length=50, null=True)
+    
 
 class usuario(models.Model):
     name=models.CharField(max_length=60, null=True)

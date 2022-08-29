@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% for message in messages %}
+        <span style="color:red;">{{message}} </span>
+        {% endfor %}
+        <form method="post">      
+            {% csrf_token %}
+            <h2>Iniciar Sesión<h2>
+            <input type="text" name="usuario" placeholder="Usuario" required></input><br>
+            <input type="password" name="clave" placeholder="Contraseña" required></input><br>
+            <button type="submit">Ingresar</button>
+        </form>
+    </body>
 </html>

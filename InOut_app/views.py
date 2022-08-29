@@ -41,3 +41,8 @@ def Main(request):
 
     return render(request, "Main.html")
 
+
+def Welcome(request):
+
+    return render(request, "Welcome.html")
+

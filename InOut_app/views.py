@@ -4,38 +4,37 @@ from django.shortcuts import render, HttpResponse
 
 def Registro(request):
 
-    return HttpResponse("Registro")
+    return render(request, "Registro.html")
 
 
 def Ingreso(request):
 
-    return HttpResponse("Ingreso")
+    return render(request, "Ingreso.html")
 
 
 def Home(request):
 
-    return HttpResponse("Home")
+    return render(request, "Home.html")
 
 
 def Usuario(request):
-
-    return HttpResponse("Usuario")
+    return render(request, "Usuario.html")
 
 def Productos(request):
 
-    return HttpResponse("Producto")
+    return render(request, "Productos.html")
 
 def graficas(request):
 
-    return HttpResponse("Graficas")
+    return render(request, "Graficas.html")
 
 def Tendencias(request):
 
-    return HttpResponse("Tendencias")
+    return render(request, "Tendencias.html")
 
 
 def Opciones(request):
 
-    return HttpResponse("Opciones")
+    return render(request, "Opciones.html")
 
 

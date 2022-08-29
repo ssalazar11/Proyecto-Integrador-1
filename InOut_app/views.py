@@ -37,4 +37,7 @@ def Opciones(request):
 
     return render(request, "Opciones.html")
 
+def Main(request):
+
+    return render(request, "Main.html")
 

@@ -1,12 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/eea4a3a7bd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/Main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <title>InOut</title>
 </head>
 <body>
-    
+    <nav>
+            <div id="nav-title">
+            <h2 id="title">InOut</h2>
+            </div>
+            <div class="Nav-Op">
+                <i class="fa-solid fa-user iconos-nav"></i>
+                <h3 class="Op">Usuarios</h3>
+            </div>
+            <div class="Nav-Op">
+                <i class="fa-solid fa-cubes iconos-nav"></i>
+                <h3 class="Op">Productos</h3>
+            </div>
+            <div class="Nav-Op">
+                <i class="fa-solid fa-chart-area iconos-nav"></i>
+                <h3 class="Op">Graficas</h3>
+            </div>
+            <div class="Nav-Op">
+                <i class="fa-solid fa-chart-line iconos-nav"></i>
+                <h3 class="Op">Tendencias</h3>
+            </div>
+            <div class="Nav-Op">
+                <i class="fa-solid fa-gear iconos-nav"></i>
+                <h3 class="Op">Opciones</h3>
+            </div>
+            <div class="Nav-Op">
+                <i class="fa-solid fa-arrow-right-from-bracket iconos-nav"></i>
+                <h3 class="Op">Cerrar Sesion</h3>
+            </div>
+    </nav>
+    <main>
+    {% block content %} {% endblock %} 
+    </main>
 </body>
 </html>

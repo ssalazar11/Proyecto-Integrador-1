@@ -1,12 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "Main.html" %}
+{% load static %}
+
+    {% block content %}
+        <div>
+            <header>
+                <h1 id="TituloSeccion">Productos</h1>
+            </header>
+            <div id="Destacados">
+               <h2 id="Pro-Title">Destacados</h2>
+               <hr/>
+               <div id="items">
+                    <div class="ItemDestacado">
+                        <h3 class="title">Mas vendido</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                    </div>
+                    <div class="ItemDestacado">
+                        <h3 class="title">Mayor Cantidad</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                    </div>
+                    <div class="ItemDestacado">
+                        <h3 class="title">Agotandose</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                    </div>
+               </div>
+            </div>
+            <div id="GridProductos">
+                <h2 id="Pro-Title">Inventario</h2>
+                <hr/>
+                <div id="Pro-Items">
+                    <div class="Item">
+                        <h3 class="title">Gaseosa</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <br />
+                        <p class="Cantidad">5</p>
+                    </div>
+                    <div class="Item">
+                        <h3 class="title">Agua</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <br />
+                        <p class="Cantidad">5</p>
+                    </div>
+                    <div class="Item">
+                        <h3 class="title">Pan Bimbo</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <br />
+                        <p class="Cantidad">5</p>
+                    </div>
+                    <div class="Item">
+                        <h3 class="title">Coca-cola</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <br />
+                        <p class="Cantidad">5</p>
+                    </div>
+                    <div class="Item">
+                        <h3 class="title">Papel</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <br />
+                        <p class="Cantidad">5</p>
+                    </div>
+                    <div class="Item">
+                        <h3 class="title">Lampara</h3>
+                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <br />
+                        <p class="Cantidad">5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+

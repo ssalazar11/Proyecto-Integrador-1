@@ -7,7 +7,7 @@ a{
 }
 
 nav{
-    background-color: red;
+    background-color: rgba(53, 52, 52, 1);
     width: 300px;
     height: 100%;
     position: fixed;
@@ -21,7 +21,7 @@ nav{
     
     margin: 15px;
     height: 60px;
-    color:rgb(233, 218, 198);
+    color:rgba(255, 210, 157, 1);
     font-size: 40px;
     text-align: center;
     justify-content: center;

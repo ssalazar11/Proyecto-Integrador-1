@@ -1,24 +1,20 @@
+{% extends 'main.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <link rel="stylesheet" href="{% static 'inventario/producto.css'%}">
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
+<link rel="stylesheet" href="{% static 'producto.css' %}">
+{% block content %}
 <body>
 <div id="nombreProducto">
     <h1>Parcial de Logica problablemente incompleto</h1>
 </div>    
 
 <div>
-    <img src="{% static "inventario/media/prueba parcial.PNG" %}" alt="no hay" height="500">
+    <img src="{% static 'prueba parcial.PNG' %}" alt="no hay" height="500">
 </div>
 
 <div id="precioProducto">
-    <h2>Precio</h2>
+    <h2>Precio</h2> 
 </div>
 <div id="precio">
     $40.000
@@ -40,6 +36,8 @@
         Disponibilidad: Disponible.
     </h6>
 </div>
+{% endblock %}
+
 
 </body>
 </html>

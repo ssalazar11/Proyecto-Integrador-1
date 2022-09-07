@@ -18,10 +18,11 @@ class Producto(models.Model):
 class Venta(models.Model):
     Producto = models.ForeignKey(
     "Producto", on_delete=models.CASCADE)
-    Nombre = models.CharField(max_length=20)
     Cantidad = models.IntegerField()
     Precio = models.FloatField()
-    Fecha = models.DateTimeField(auto_now_add=True)
+    Fecha = models.DateTimeField()
+    def __str__(self) -> str:
+        return ("Nombre:%s, cantidad: %d" % (self.Producto.Nombre, self.Cantidad))
     #Cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE)
 
 

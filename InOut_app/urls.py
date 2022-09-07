@@ -12,5 +12,7 @@ urlpatterns = [
     path('Opciones/', views.Opciones, name="Opciones"),
     path('Main/', views.Main, name="Main"),
     path('Welcome/', views.Welcome, name="Welcome"),
-    path('Logout/', views.Welcome, name="Logout")
+    path('Logout/', views.Welcome, name="Logout"),
+    path('api/get_data/', views.get_data, name='api-data'),
+    path('test/', views.test, name='test'),
 ]

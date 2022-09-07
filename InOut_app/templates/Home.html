@@ -30,12 +30,12 @@
                 <div id="Pro-Items">
                     {% for producto in productos.all %}
                     <div class="Item">
-                        <h3 class="title">{{producto.nombre}}</h3>
+                        <h3 class="title">{{producto.Nombre}}</h3>
                         <div class = "div_img">
-                        <img class="product" src={{producto.imagen}}>
+                        <img class="product" src="{{MEDIA_URL}}{{producto.Imagen}}">
                         </div>
                         <br />
-                        <p class="Cantidad">{{producto.cantidad}}</p>
+                        <p class="Cantidad">{{producto.Cantidad}}</p>
                     </div>
                     {% endfor %}
                 </div>

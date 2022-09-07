@@ -11,7 +11,9 @@ class Producto(models.Model):
     Imagen = models.ImageField(default= 'static/images/pan.png')
     def disponible(self):
         return self.Cantidad > 0
-
+    
+    def __str__(self) -> str:
+        return ("Nombre:%s, cantidad: %d, Precio: %d" % (self.Nombre, self.Cantidad, self.Precio))
 
 class Venta(models.Model):
     Producto = models.ForeignKey(

@@ -14,6 +14,7 @@ def Ingreso(request):
 
 def Home(request):
     productos =  Producto.objects
+    
     print(productos)
     return render(request, "Home.html", {"productos":productos})
 

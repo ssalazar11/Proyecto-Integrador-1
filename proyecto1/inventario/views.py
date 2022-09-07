@@ -4,3 +4,9 @@ from django.shortcuts import render
 
 def producto(request):
     return render(request, "producto.html")
+
+def opciones(request):
+    return render(request, "opciones.html")
+
+def usuario(request):
+    return render(request, "usuario.html")

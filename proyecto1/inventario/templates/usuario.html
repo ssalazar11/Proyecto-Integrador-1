@@ -1,0 +1,37 @@
+{% extends 'main.html'%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+</head>
+{% block content %}
+<body>
+    <h1>Usuario</h1>
+    <h1>Hola Samuel Salazar</h1>
+    <div class="imagen">
+        <img src="{% static 'fotoSamuel.png' %}" alt="no hay" height="300">
+    </div>
+    <table>
+        <tr>
+            <td>Nombre</td>
+            <td>ejemploNombre</td>
+        </tr>
+        <br>
+        <tr>
+            <td>Correo</td>
+            <td>ejemploCorreo</td>
+        </tr>
+        <tr>
+            <td>Empresa</td>
+            <td>ejemploEmpresa</td>
+        </tr>
+        <td>Cargo</td>
+        <td>ejemploCargo</td>
+    </table>
+</body>
+{% endblock %}
+</html>

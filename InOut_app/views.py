@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-
+from .models import Producto
 # Create your views here.
 
 def Registro(request):
@@ -13,8 +13,9 @@ def Ingreso(request):
 
 
 def Home(request):
-
-    return render(request, "Home.html")
+    productos =  Producto.objects
+    print(productos)
+    return render(request, "Home.html", {"productos":productos})
 
 
 def Usuario(request):

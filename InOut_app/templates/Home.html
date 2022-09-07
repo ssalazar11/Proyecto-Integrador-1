@@ -28,44 +28,17 @@
                 <h2 id="Pro-Title">Inventario</h2>
                 <hr/>
                 <div id="Pro-Items">
+                    {% for producto in productos.all %}
                     <div class="Item">
-                        <h3 class="title">Gaseosa</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <h3 class="title">{{producto.nombre}}</h3>
+                        <div class = "div_img">
+                        <img class="product" src={{producto.imagen}}>
+                        </div>
                         <br />
-                        <p class="Cantidad">5</p>
+                        <p class="Cantidad">{{producto.cantidad}}</p>
                     </div>
-                    <div class="Item">
-                        <h3 class="title">Agua</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
-                        <br />
-                        <p class="Cantidad">5</p>
-                    </div>
-                    <div class="Item">
-                        <h3 class="title">Pan Bimbo</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
-                        <br />
-                        <p class="Cantidad">5</p>
-                    </div>
-                    <div class="Item">
-                        <h3 class="title">Coca-cola</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
-                        <br />
-                        <p class="Cantidad">5</p>
-                    </div>
-                    <div class="Item">
-                        <h3 class="title">Papel</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
-                        <br />
-                        <p class="Cantidad">5</p>
-                    </div>
-                    <div class="Item">
-                        <h3 class="title">Lampara</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
-                        <br />
-                        <p class="Cantidad">5</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     {% endblock %}
-

@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    {% for i in  '01'|make_list %}
+    {% for i in  number %}
     <div class="container" style="width: 300px;">
         <canvas id="myChart{{i}}"></canvas>
     </div>
@@ -22,7 +22,7 @@
 
 <script>
 var charts = [] 
-for (let i =0; i < 2; i++){
+for (let i =0; i <{{n}}; i++){
 
 const ctx = document.getElementById('myChart'+i).getContext('2d');
 nombre = {{names|safe}}[i]

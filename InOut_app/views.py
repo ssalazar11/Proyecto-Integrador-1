@@ -31,7 +31,29 @@ def Productos(request):
 
 def graficas(request):
 
-    return render(request, "Graficas.html")
+    labels = []
+    data = []
+    query = []
+    names = []
+    Productos = ((Venta.objects.values_list('Producto_id', flat=True).distinct()))
+
+    for id_p in Productos:
+        names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
+    
+    print(names)
+    
+    for producto in Productos:
+        (query.append(Venta.objects.filter(Producto_id = producto).order_by('Fecha')))
+
+   
+    for index, producto in enumerate(query, 0):
+        labels.append([])
+        data.append([])
+        for V in producto:
+            labels[index].append(V.Fecha.strftime('%m/%d/%y'))
+            data[index].append(V.Cantidad)
+    print(names)
+    return render(request, 'Graficas.html', {'labels': labels, 'data': data, 'names': names, 'n': len(names), 'number':list(range(0, len(names)))})
 
 def Tendencias(request):
 
@@ -79,6 +101,5 @@ def test(request):
         for V in producto:
             labels[index].append(V.Fecha.strftime('%m/%d/%y'))
             data[index].append(V.Cantidad)
-
-
-    return render(request, 'test.html', {'labels': labels, 'data': data, 'names': names})
+    print(names)
+    return render(request, 'test.html', {'labels': labels, 'data': data, 'names': names, 'n': len(names), 'number':list(range(0, len(names)))})

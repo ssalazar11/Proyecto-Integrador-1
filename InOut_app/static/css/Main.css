@@ -1,5 +1,9 @@
 html, body{
-    margin: 0px
+    margin: 0px;
+    padding: 0px;
+    background-color: #ffffff;
+    background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
+    background-size: 10px 10px;
 }
 
 a{
@@ -145,4 +149,112 @@ hr{
    border: none;
 }
 
+
+.Art-opc{
+    width: 50px;
+    height: 50px;
+    display: flex;
+}
+
+
+
+.agregar-font{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color:black;
+}
+
+.borrar{
+    margin: 0;
+}
+
+.agregar_prod{
+    border: 1px solid black;
+    margin-left: 50px;
+    width: 80px;
+    border-radius: 15px;;
+}
+
+.agregar_prod:hover{
+    border: 1px solid black;
+    margin-left: 50px;
+    width: 80px;
+    border-radius: 15px;
+    background-color: antiquewhite;
+}
+
+.agregar{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 15px;
+    height: 300px;
+    margin:auto;
+    position:relative;
+    top:250px;
+    background-color: rgb(87, 83, 83);
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.send{
+    width: 80px;
+    height: 25px;
+    margin: auto;
+    margin-top: 20px;
+    border:rgb(87, 83, 83);
+    border-radius: 15px;
+
+}
+
+.send:hover{
+    width: 80px;
+    height: 25px;
+    margin: auto;
+    margin-top: 20px;
+    border:rgb(87, 83, 83);
+    border-radius: 15px;
+    background-color: antiquewhite;;
+}
+
+form, label{
+    color:rgb(207, 207, 207);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.add_title{
+    margin:0;
+    color:white;
+    margin-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+#eliminacion{
+    color:white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.Art-opc1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cancelar{
+    margin-right: 30px;
+}
 /* GRAFICAS */

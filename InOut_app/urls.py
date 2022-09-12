@@ -1,5 +1,7 @@
 from django.urls import path
 from InOut_app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('Registro/', views.Registro, name="Registro"),
@@ -15,4 +17,7 @@ urlpatterns = [
     path('Logout/', views.Welcome, name="Logout"),
     path('api/get_data/', views.get_data, name='api-data'),
     path('test/', views.test, name='test'),
-]
+    path('agregar/', views.registroProducto, name="agregar"),
+    path('eliminar/', views.EliminarItem, name="eliminar"),
+    path('eliminar/<str:nombre>', views.eliminacionProducto, name="borrar"),
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

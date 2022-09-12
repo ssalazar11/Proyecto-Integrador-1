@@ -1,9 +1,11 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from .models import Producto, Venta
 from django.http import JsonResponse
 import datetime
 from collections import OrderedDict
-# Create your views here.
+from django.urls import reverse
+from .forms import productoForm, Deleteform
+
 
 def Registro(request):
 
@@ -105,3 +107,40 @@ def test(request):
             data[index].append(V.Cantidad)
     print(names)
     return render(request, 'test.html', {'labels': labels, 'data': data, 'names': names, 'n': len(names), 'number':list(range(0, len(names)))})
+
+
+
+
+def registroProducto(request):
+    form=productoForm()
+    context={'form':form}
+    if request.method == 'POST':
+        form=productoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Productos')
+    return render(request, 'agregar.html', context)
+
+
+def EliminarItem(request):
+    form=Deleteform()
+    context={'form':form}
+    if request.method == 'POST':
+        form=Deleteform(request.POST)
+        if form.is_valid():
+            nombre= form.cleaned_data.get("Nombre")
+            return redirect(reverse('borrar', kwargs={"nombre": nombre}))
+    return render(request, 'borrar2.html', context)
+
+
+def eliminacionProducto(request, nombre):
+    try:
+        productoBorrar=Producto.objects.get(Nombre=nombre)
+    except:
+        return redirect('eliminar')
+    if request.method == "POST":
+        productoBorrar.delete()
+        return redirect('Productos')
+    context={'item':productoBorrar}
+    return render(request, 'borrar.html', context)
+

@@ -27,6 +27,10 @@
             <div id="GridProductos">
                 <h2 id="Pro-Title">Inventario</h2>
                 <hr/>
+                <div class="Art-opc">
+                    <a href="{% url 'agregar' %}"> <div class="agregar_prod"><p class="agregar-font">Agregar</p> </div></a> 
+                    <a href="{% url 'eliminar' %}"><div class="agregar_prod"><p class="agregar-font">Eliminar</p> </div></a>
+                </div>
                 <div id="Pro-Items">
                     {% for producto in productos.all %}
                     <div class="Item">

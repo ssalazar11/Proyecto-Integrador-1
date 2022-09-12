@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>borrar</title>
+</head>
+<body>
+    {% block content %}
+    <div class="agregar">
+        <p id="eliminacion">¿Esta seguro que desea eliminar el producto con la informacion "{{item}}"?</p>
+        <form action="{% url 'borrar' item.Nombre %}" method="POST">
+            {% csrf_token %}
+            <div class="Art-opc1">
+                <a id="cancelar" href="{% url 'Productos'%}"><button> Cancelar</button></a>
+                <input type="submit" name="confirmar">
+            </div>
+        </form>
+        {% endblock %}
+    </div>
+</body>
+</html>

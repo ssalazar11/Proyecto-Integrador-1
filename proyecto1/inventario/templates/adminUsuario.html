@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adminUsuario</title>
+</head>
+<body>
+    <table>
+        {% for i in producto %}
+        
+        <tr>
+            <td>{{i.nombreProducto}}</td>
+            <td>{{i.tipoProducto}}</td>
+            <td>{{i.cantidadProducto}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="agregar">
+        <a href="{% url 'agregar' %}">Agregar</a>
+    </div>
+    <div class="borrar">
+        <a href="{%url 'borrar' %}">Borrar</a>
+    </div>
+</body>
+</html>

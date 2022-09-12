@@ -16,6 +16,6 @@ class usuario(models.Model):
 class producto(models.Model):
     nombreProducto=models.CharField(max_length=60, null=True)
     tipoProducto=models.IntegerField()
-    cantidadProducto=models.IntegerField()
+    cantidadProducto=models.IntegerField() 
 
     

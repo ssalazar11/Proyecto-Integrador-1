@@ -26,8 +26,10 @@ def Usuario(request):
     return render(request, "Usuario.html")
 
 def Productos(request):
-
-    return render(request, "Productos.html")
+    productos =  Producto.objects
+    
+    print(productos)
+    return render(request, "Productos.html", {"productos":productos})
 
 def graficas(request):
 

@@ -13,18 +13,19 @@ def registroProducto(request):
             return redirect('adminUsuario')
     return render(request, 'agregar.html', context)
 
-def eliminacionProducto(request):
-    if request.method == 'POST':
-        producto=producto.objects.get(id=pk)
-        producto.delete()
+def eliminacionProducto(request, nombre):
+    productoBorrar=producto.objects.get(nombreProducto=nombre)
+    if request.method == "POST":
+        productoBorrar.delete()
         return redirect('adminUsuario')
-    #context={'item':producto}
-    return render(request, 'borrar.html')
+    context={'item':productoBorrar}
+    return render(request, 'borrar.html', context)
 
 
 def adminUsuario(request):
     productos=producto.objects.all()
-    return render(request, "adminUsuario.html", {'producto':productos})
+    context={'producto':productos}
+    return render(request, "adminUsuario.html",context)
 
 def productoPag(request):
     return render(request, "producto.html")

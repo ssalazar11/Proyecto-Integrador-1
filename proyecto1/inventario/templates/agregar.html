@@ -1,4 +1,4 @@
-
+{% extends 'main.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +8,7 @@
     <title>Administrador</title>
 </head>
 <body>
+    {% block content %}
     <div class="agregar">
         <form method="post">
             {% csrf_token %}
@@ -15,5 +16,6 @@
             <input type="submit" name="submit">
         </form>
     </div>
+    {% endblock %}
 </body>
 </html>

@@ -1,22 +1,32 @@
-from django.shortcuts import render
-from inventario import models
+from django.shortcuts import render, redirect
+from .models import *
+from .forms import productoForm
 # Create your views here.
 
 def registroProducto(request):
+    form=productoForm()
+    context={'form':form}
     if request.method == 'POST':
-        nombreProducto=request.POST['nombreProducto']
-        tipoProducto=request.POST['tipoProducto']
-        cantidadProducto=request.POST['cantidadProducto']
-        agregar=models.producto(nombreProducto=nombreProducto, tipoProducto=tipoProducto, cantidadProducto=cantidadProducto)
-        agregar.save()
+        form=productoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('adminUsuario')
+    return render(request, 'agregar.html', context)
 
-def eliminacionProducto(request, nombre):
+def eliminacionProducto(request):
     if request.method == 'POST':
-        producto=producto.objects.get(nombreProducto=nombre)
+        producto=producto.objects.get(id=pk)
         producto.delete()
-        
+        return redirect('adminUsuario')
+    #context={'item':producto}
+    return render(request, 'borrar.html')
 
-def producto(request):
+
+def adminUsuario(request):
+    productos=producto.objects.all()
+    return render(request, "adminUsuario.html", {'producto':productos})
+
+def productoPag(request):
     return render(request, "producto.html")
 
 def opciones(request):

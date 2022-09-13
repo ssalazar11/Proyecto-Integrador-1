@@ -1,0 +1,82 @@
+html, body{
+    margin: 0;
+
+
+}
+
+header{
+    height: 100px;
+    width: 100%;
+    background-color: rgba(53, 52, 52, 1);
+    display: flex;
+}
+
+header > h1{
+    margin:0px 0px 0px 30px;
+    color:rgba(255, 210, 157, 1);
+    font-size: 80px;
+    text-align: center;
+    
+}
+
+#container2 > h1{
+    font-size: 80px;
+    font-family: 'Open Sans', sans-serif;
+}
+.colorin{
+    color:rgb(250, 193, 127);
+    
+}
+#container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+h2{
+    font-family: 'Open Sans', sans-serif;
+}
+
+#container2{
+    margin-left: 50px;
+    width: 80%;
+}
+
+#opciones{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none;
+
+}
+
+a > div{
+    height: 100px;
+    width: 200px;
+    color:black;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 15px;
+}
+
+a > div:hover{
+    background-color: rgb(252, 210, 161);
+}
+
+a >div>p{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
+    font-size: 25px;
+    margin-top: 25px;
+}
+
+img{
+    height: 909px;
+
+}

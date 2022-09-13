@@ -224,12 +224,14 @@ form{
     background-color: antiquewhite;;
 }
 
-form, label{
+form > label{
     color:rgb(207, 207, 207);
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     margin-bottom: 5px;
 }
+
+
 
 .add_title{
     margin:0;
@@ -257,4 +259,13 @@ form, label{
 #cancelar{
     margin-right: 30px;
 }
+
+#forma{
+    color:rgb(207, 207, 207) !important; 
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+
 /* GRAFICAS */

@@ -1,19 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/eea4a3a7bd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/Home.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <title>InOut</title>
 </head>
 
+<header>
+    <h1>InOut</h1>
+</header>
+
 <body>
-    <center><h1> Bienvenido a InOUT</h1> 
-    <br>
-    <br>
-    <a href="{% url 'Ingreso' %}"> Ingresar </a>
-    <br>
-    <a href="{% url 'Registro' %}"> Registrarse </a>
-    </center>   
+    <div id="container">
+    <div id="container2">
+        <h1>Manejar tu <span class="colorin">inventario</span> es solo el primer paso</h1>
+        <h2>InOut es una herramienta que no solo te ayudara a gestionar tu inventario, sino que le dara valor a tus datos, para que asi  puedas tomar las mejores decisiones para tu negocio!</h2>
+        <div id="opciones">
+        <a href="{% url 'Ingreso' %}"> <div><p>Ingresar</p></div> </a>
+        <br>
+        <a href="{% url 'Registro' %}"> <div><p>Registrarse</p></div> </a>
+        </div>
+    </div>
+    <img src="{% static 'images/inventario.png' %}">
+</div>
 </body>
 </html>

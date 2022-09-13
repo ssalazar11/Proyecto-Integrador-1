@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', views.Welcome, name="Welcome"),
     path('Registro/', views.Registro, name="Registro"),
     path('Ingreso/', views.Ingreso, name="Ingreso"),
     path('Home/',   views.Home, name="Home"),
@@ -14,10 +15,12 @@ urlpatterns = [
     path('Opciones/', views.Opciones, name="Opciones"),
     path('Main/', views.Main, name="Main"),
     path('Welcome/', views.Welcome, name="Welcome"),
-    path('Logout/', views.Welcome, name="Logout"),
+    path('Logout/', views.logOut_request, name="Logout"),
     path('api/get_data/', views.get_data, name='api-data'),
     path('test/', views.test, name='test'),
     path('agregar/', views.registroProducto, name="agregar"),
     path('eliminar/', views.EliminarItem, name="eliminar"),
     path('eliminar/<str:nombre>', views.eliminacionProducto, name="borrar"),
+    path('actualizar/<str:nombre>', views.actualizar, name="actualizar"),
+    path('actualizar/', views.modificar, name="modificar"),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

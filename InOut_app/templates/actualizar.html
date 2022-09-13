@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+</head>
+<body>
+    {% block content %}
+    <div class="agregar">
+        <h3 class="add_title">Ingrese los datos de su producto</h3>
+        <form action="{% url 'actualizar' item.Nombre %}" method="post">
+            {% csrf_token %}
+            <p hidden>Nombre del Producto: <input type="text" value="{{item.Nombre}}" name="producto" > </p >
+            <p style="    color:rgb(207, 207, 207) !important; 
+            font-family: 'Open Sans', sans-serif;
+            font-weight: bold;
+            margin-bottom: 5px;">Cantidad del Producto:<input type="number" name="cantidad" value="{{item.Cantidad}}"></p>
+            <input class="send" type="submit" name="submit">
+        </form>
+        
+    </div>
+    {% endblock %}
+</body>
+</html>

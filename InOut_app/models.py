@@ -26,6 +26,14 @@ class Venta(models.Model):
     #Cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE)
 
 
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=60)
+    apellido = models.CharField(max_length=120)
+    usuario = models.CharField(max_length=20)
+    correo = models.CharField(max_length=100)
+    clave = models.CharField(max_length=100)
+
+
 """
 class Categoria(models.Model):
     Nombre = models.CharField(max_length=20)

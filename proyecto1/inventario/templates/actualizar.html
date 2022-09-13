@@ -10,11 +10,16 @@
 <body>
     {% block content %}
     <div class="agregar">
-        <form method="post">
+
+        
+        <form action="{% url 'actualizar' item.nombreProducto %}" method="post">
             {% csrf_token %}
-            {{form}}
+            <p hidden>Nombre del Producto: <input type="text" value="{{item.nombreProducto}}" name="producto" > </p >
+            <p hidden>Tipo de Producto: <input type="text" value="{{item.tipoProducto}}" name="tipo"></p>
+            <p>Cantidad del Producto:<input type="number" name="cantidad" value="{{item.cantidadProducto}}"></p>
             <input type="submit" name="submit">
         </form>
+        
     </div>
     {% endblock %}
 </body>

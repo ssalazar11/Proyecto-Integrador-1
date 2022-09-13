@@ -1,3 +1,4 @@
+{% extends 'main.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,15 @@
     <title>borrar</title>
 </head>
 <body>
+    {% block content %}
     <div class="Borrar">
-        <form method="post">
+        <p>¿Esta seguro que desea eliminar "{{item}}"?</p>
+        <form action="{% url 'borrar' item.nombreProducto %}" method="POST">
             {% csrf_token %}
-            {{form}}
-            <input type="submit" name="submit">
+            <a href="{% url 'adminUsuario'%}">Cancelar</a>
+            <input type="submit" name="confirmar">
         </form>
+        {% endblock %}
     </div>
 </body>
 </html>

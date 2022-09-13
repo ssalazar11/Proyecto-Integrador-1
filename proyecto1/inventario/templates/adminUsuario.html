@@ -1,3 +1,4 @@
+{% extends 'main.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +8,23 @@
     <title>adminUsuario</title>
 </head>
 <body>
+    {% block content %}
+    <a href="{% url 'agregar'%}">Agregar</a>
+    <br>
     <table>
         {% for i in producto %}
-        
         <tr>
             <td>{{i.nombreProducto}}</td>
             <td>{{i.tipoProducto}}</td>
             <td>{{i.cantidadProducto}}</td>
+            <td></td>
+            <td><a href="{%url 'actualizar' i.nombreProducto %}">Actualizar</a></td>
+            <td><a href="{%url 'borrar' i.nombreProducto %}">Borrar</a></td>
+           
         </tr>
         {% endfor %}
-    </table>
-    <div class="agregar">
-        <a href="{% url 'agregar' %}">Agregar</a>
-    </div>
-    <div class="borrar">
-        <a href="{%url 'borrar' %}">Borrar</a>
-    </div>
+        </table>
+        </div>
+    {% endblock %}
 </body>
 </html>

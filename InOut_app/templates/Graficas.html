@@ -7,10 +7,13 @@
     <header>
         <h1 id="TituloSeccion">Graficas</h1>
     </header>
+
+  
     
     <div id="GridProductos">
         <h2 id="Pro-Title">Graficas Ventas</h2>
         <hr/>
+        <a href="{% url 'Gmod' %}"> <div class="agregar_prod" id="margen_top"><p class="agregar-font">Filtros</p> </div></a> 
         <div id="Pro-Items">
             {% for i in  number %}
             <div class="Item">
@@ -51,14 +54,38 @@ const myChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
+            borderColor:"black",
+            lineTension: 0.6,
+            pointBackgroundColor:"yellow",
             borderWidth: 1
         }]
     },
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                //max:100,
+                //min:0,
+                beginAtZero: true,
+                title: {
+                    font: {
+                        size: 15, 
+                    },
+                    color: "black",
+                    display: true,
+                     text: 'Ventas'
+                }
+            },
+            x:{
+                title: {
+                    font: {
+                        size: 15, 
+                    },
+                    color: "black",
+                    display: true,
+                    text: 'Fechas'
+                }
             }
+            
         }
     }
 });

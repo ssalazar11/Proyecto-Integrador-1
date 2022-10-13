@@ -125,6 +125,15 @@ header{
     row-gap: 60px;
 }
 
+#Pro-Items22{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    align-items: center;
+    row-gap: 60px;
+}
+
+
 .Item{
     margin: 0 50px 0 50px;
     justify-content: center;
@@ -269,3 +278,4 @@ form > label{
 
 
 /* GRAFICAS */
+

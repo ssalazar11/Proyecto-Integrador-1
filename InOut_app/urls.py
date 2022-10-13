@@ -23,4 +23,5 @@ urlpatterns = [
     path('eliminar/<str:nombre>', views.eliminacionProducto, name="borrar"),
     path('actualizar/<str:nombre>', views.actualizar, name="actualizar"),
     path('actualizar/', views.modificar, name="modificar"),
+    path('Gmod/', views.Gmod, name="Gmod"),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

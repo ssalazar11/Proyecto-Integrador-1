@@ -1,5 +1,6 @@
+from math import prod
 from django.shortcuts import render, redirect, HttpResponse
-from .models import Producto, Venta, Usuario
+from .models import Producto, Venta, Usuario, Gop
 from django.http import JsonResponse
 import datetime
 from InOut_app import logic, models
@@ -10,6 +11,48 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 login_check = False
+tipo = "mes"
+
+
+def filter_time(query):
+    global tipo
+    if tipo == 'mes':
+        filtro = 13
+        top = 13*30
+        timef = '%m/%d/%y'
+    elif tipo == 'año':
+        filtro = 13*30
+        top = 12
+        timef = '%m/%d/%y'
+    elif tipo == 'dia':
+        filtro = 1
+        top = 24
+        timef = "%m/%d/%H:%M"
+    labels = []
+    data = []
+    cont = 0
+    cantidad = 0
+    for index, producto in enumerate(query, 0):
+        labels.append([])
+        data.append([])
+        p = (list(producto))
+        if len(p) > top:
+            producto2 = p[len(p)-top:]
+        else:
+            producto2 = p
+        print(producto2)
+        for V in producto2:
+            if cont == filtro:
+                labels[index].append(V.Fecha.strftime(timef))
+                data[index].append(cantidad)
+                cantidad = 0
+                cont = 0
+            cantidad += (V.Cantidad)
+            cont +=1
+    return [labels, data]
+    
+
+
 def Registro(request):
     if request.method == 'POST':
         nombre = request.POST['nombre']
@@ -76,31 +119,33 @@ def Productos(request):
     return render(request, "Productos.html", {"productos":productos})
 
 def graficas(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    #global login_check
+    #if login_check==False:
+        #return redirect('Welcome')
     labels = []
     data = []
     query = []
     names = []
     Productos = ((Venta.objects.values_list('Producto_id', flat=True).distinct()))
-
+    
     for id_p in Productos:
         names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
     
-    print(names)
     
     for producto in Productos:
         (query.append(Venta.objects.filter(Producto_id = producto).order_by('Fecha')))
 
-   
+    filtrado = filter_time(query)
+    labels = filtrado[0]
+    data = filtrado[1]
+    """
     for index, producto in enumerate(query, 0):
         labels.append([])
         data.append([])
         for V in producto:
             labels[index].append(V.Fecha.strftime('%m/%d/%y'))
             data[index].append(V.Cantidad)
-    print(names)
+    """
     return render(request, 'Graficas.html', {'labels': labels, 'data': data, 'names': names, 'n': len(names), 'number':list(range(0, len(names)))})
 
 def Tendencias(request):
@@ -220,6 +265,25 @@ def actualizar(request, nombre):
     return render(request, 'actualizar.html', context)
 
 
+
+def Gmod(request):
+    #global login_check
+    global tipo
+    #if login_check==False:
+     #   return redirect('Welcome')
+    if request.method == "POST":
+        tipo = request.POST["fecha"]
+        try:
+            Tipo_data = Gop.objects.get(id=1)
+            Tipo_data.timestep=tipo
+            Tipo_data.save(update_fields =['timestep'])
+        except:
+            data = Gop(id=1, timestep=tipo)
+            data.save()
+        return redirect('Graficas')
+    return render(request, 'Gmod.html')
+
+
 def eliminacionProducto(request, nombre):
     global login_check
     if login_check==False:
@@ -239,3 +303,4 @@ def logOut_request(request):
     global login_check
     login_check = False
     return redirect("Welcome")
+

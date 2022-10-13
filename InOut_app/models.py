@@ -22,7 +22,7 @@ class Venta(models.Model):
     Precio = models.FloatField()
     Fecha = models.DateTimeField()
     def __str__(self) -> str:
-        return ("Nombre:%s, cantidad: %d" % (self.Producto.Nombre, self.Cantidad))
+        return ("Nombre:%s, cantidad: %d, fecha: %s" % (self.Producto.Nombre, self.Cantidad, self.Fecha))
     #Cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE)
 
 
@@ -32,6 +32,11 @@ class Usuario(models.Model):
     usuario = models.CharField(max_length=20)
     correo = models.CharField(max_length=100)
     clave = models.CharField(max_length=100)
+
+
+class Gop(models.Model):
+    timestep = models.CharField(max_length=60)
+
 
 
 """

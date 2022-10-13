@@ -126,6 +126,7 @@ header{
 }
 
 #Pro-Items22{
+    margin-top: 50px;
     display: grid;
     grid-template-columns: 50% 50%;
     justify-content: center;
@@ -274,6 +275,22 @@ form > label{
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     margin-bottom: 5px;
+}
+
+#tendencias{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.ten_con{
+    width: 90%;
+    height: 100px;
+    background-color: gray;
+    border-radius: 5px;
+    text-align: center;
 }
 
 

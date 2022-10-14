@@ -11,11 +11,31 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 login_check = False
-tipo = "mes"
+#tipo = "mes"
+#fecha = 'nulo'
+#mes = 6
+meses={
+    1: 'Enero',
+    2: 'Febrero',
+    3: 'Marzo',
+    4: 'Abril',
+    5: 'Mayo',
+    6: 'Junio',
+    7: 'Julio',
+    8: 'Agosto',
+    9: 'Septiembre',
+    10: 'Octubre',
+    11: 'Noviembre',
+    12: 'Diciembre',
+
+}
 
 
 def filter_time(query):
-    global tipo
+    opciones = ((Gop.objects.filter(id = 1)))
+    print(opciones[0].Fecha)
+    tipo = opciones[0].timestep
+    fecha = opciones[0].Fecha
     if tipo == 'mes':
         filtro = 13
         top = 13*30
@@ -36,11 +56,29 @@ def filter_time(query):
         labels.append([])
         data.append([])
         p = (list(producto))
-        if len(p) > top:
-            producto2 = p[len(p)-top:]
-        else:
-            producto2 = p
-        print(producto2)
+        print(fecha.strftime('%Y'))
+        if int(fecha.strftime('%Y')) < 2000:
+            if len(p) > top:
+                producto2 = p[len(p)-top:]
+            else:
+                producto2 = p
+        else: 
+            i = 0
+            print(len(p))
+            try:
+                i = 0
+                while i < (len(p)):
+                    if p[i].Fecha >= fecha:
+                        break;
+                    i+=1
+                producto2 = p[i:i+top]
+                print('Logrado')
+            except:
+                if len(p) > top:
+                    producto2 = p[len(p)-top:]
+                else:
+                    producto2 = p
+                print('Mori')
         for V in producto2:
             if cont == filtro:
                 labels[index].append(V.Fecha.strftime(timef))
@@ -51,6 +89,16 @@ def filter_time(query):
             cont +=1
     return [labels, data]
     
+
+def Reset(request):
+    global login_check
+    if login_check==False:
+        return redirect('Welcome')
+    Tipo_data = Gop.objects.get(id=1)
+    Tipo_data.timestep='mes'
+    Tipo_data.Fecha=datetime.datetime(1990,1,1)
+    Tipo_data.save(update_fields =['timestep','Fecha'])
+    return graficas(request)
 
 
 def Registro(request):
@@ -93,13 +141,13 @@ def Ingreso(request):
     return render(request, "Ingreso.html")
 
 
+
+
 def Home(request):
     global login_check
     if login_check==False:
         return redirect('Welcome')
     productos =  Producto.objects
-    
-    print(productos)
     return render(request, "Home.html", {"productos":productos})
 
 
@@ -114,14 +162,12 @@ def Productos(request):
     if login_check==False:
         return redirect('Welcome')
     productos =  Producto.objects
-    
-    print(productos)
     return render(request, "Productos.html", {"productos":productos})
 
 def graficas(request):
-    #global login_check
-    #if login_check==False:
-        #return redirect('Welcome')
+    global login_check
+    if login_check==False:
+        return redirect('Welcome')
     labels = []
     data = []
     query = []
@@ -152,7 +198,166 @@ def Tendencias(request):
     global login_check
     if login_check==False:
         return redirect('Welcome')
-    return render(request, "Tendencias.html")
+    opciones = ((Gop.objects.filter(id = 1)))
+    mes = int(opciones[0].mes)
+    horas2 = tendenciashoras2(mes)
+    meses = tendeciames(mes)
+    horas = tendenciashoras()
+    compara = mejor()
+    return render(request, "Tendencias.html", {'horas2': horas2, 'meses':meses, 'horas':horas, 'compara':compara })
+
+
+def tendenciashoras2(mes):
+    query = []
+    names = []
+    productos = []
+    mañana = ['06','07','08','09','10']
+    medio = ['11','12','13','14']
+    tarde=['15','16','17','18']
+    ret = []
+    Productos = ((Venta.objects.values_list('Producto_id', flat=True).distinct()))
+
+    for id_p in Productos:
+        names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
+
+    for producto in Productos:
+        (query.append(list(Venta.objects.filter(Producto_id = producto).order_by('Fecha'))))
+    
+    for producto in query:
+        ma = 0
+        me = 0
+        t = 0
+
+        for venta in producto:
+            if venta.Fecha.strftime('%H') in mañana and int(venta.Fecha.strftime('%m')) == mes:
+                ma += venta.Cantidad
+            elif venta.Fecha.strftime('%H') in medio and int(venta.Fecha.strftime('%m')) == mes:
+                me += venta.Cantidad
+            elif venta.Fecha.strftime('%H') in tarde and int(venta.Fecha.strftime('%m')) == mes:
+                t += venta.Cantidad
+        productos.append([ma,me,t])
+    
+    print(productos)
+    print(names)
+    ma = []
+    me = []
+    t = []
+    for i in productos:
+        ma.append(i[0])
+        me.append(i[1])
+        t.append(i[2])
+    ret.append(("El producto mas vendido en las mañanas del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[ma.index(max(ma))],max(ma))))
+    ret.append(("El producto mas vendido al medio dia en el mes de %s fue el %s, con un numero de %s ventas"% (meses[mes], names[me.index(max(me))],max(me))))
+    ret.append(("El producto mas vendido en las tardes del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[t.index(max(t))],max(t))))
+    return(ret)
+        
+
+
+def tendenciashoras():
+    query = []
+    names = []
+    productos = []
+    mañana = ['06','07','08','09','10']
+    medio = ['11','12','13','14']
+    tarde=['15','16','17','18']
+    ret = []
+    Productos = ((Venta.objects.values_list('Producto_id', flat=True).distinct()))
+
+    for id_p in Productos:
+        names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
+
+    for producto in Productos:
+        (query.append(list(Venta.objects.filter(Producto_id = producto).order_by('Fecha'))))
+    for producto in query:
+        ma = 0
+        me = 0
+        t = 0
+        mes = int(producto[-1].Fecha.strftime('%m'))
+        print(mes)
+        for venta in producto:
+            if venta.Fecha.strftime('%H') in mañana and int(venta.Fecha.strftime('%m')) == mes:
+                ma += venta.Cantidad
+            elif venta.Fecha.strftime('%H') in medio and int(venta.Fecha.strftime('%m')) == mes:
+                me += venta.Cantidad
+            elif venta.Fecha.strftime('%H') in tarde and int(venta.Fecha.strftime('%m')) == mes:
+                t += venta.Cantidad
+        productos.append([ma,me,t])
+
+    print(productos)
+    print(names)
+    ma = []
+    me = []
+    t = []
+    for i in productos:
+        ma.append(i[0])
+        me.append(i[1])
+        t.append(i[2])
+    ret.append(("El producto mas vendido en las mañanas del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[ma.index(max(ma))],max(ma))))
+    ret.append(("El producto mas vendido al medio dia en el mes de %s fue el %s, con un numero de %s ventas"% (meses[mes], names[me.index(max(me))],max(me))))
+    ret.append(("El producto mas vendido en las tardes del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[t.index(max(t))],max(t))))
+    return(ret)
+
+
+def tendeciames(mes):
+    query = []
+    names = []
+    productos = []
+    Productos = ((Venta.objects.values_list('Producto_id', flat=True).distinct()))
+
+    for id_p in Productos:
+        names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
+
+    for producto in Productos:
+        (query.append(list(Venta.objects.filter(Producto_id = producto).order_by('Fecha'))))
+
+    for producto in query:
+        cont = 0
+        for venta in producto:
+            if int(venta.Fecha.strftime('%m')) == mes:
+                cont += venta.Cantidad
+        productos.append([cont])
+    return("El producto mas vendido en el mes %s fue el %s con un numero de %s unidades vendidas" %(meses[mes],names[productos.index(max(productos))], max(productos)[0]))
+
+
+def mejor():
+    query = []
+    names = []
+    actual = []
+    pasado = []
+    productos = []
+    relacion = []
+    ret = []
+    Productos = ((Venta.objects.values_list('Producto_id', flat=True).distinct()))
+
+    for id_p in Productos:
+        names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
+
+    for producto in Productos:
+        (query.append(list(Venta.objects.filter(Producto_id = producto).order_by('Fecha'))))
+
+    for producto in query:
+        diaf = int(producto[-1].Fecha.strftime('%d'))
+        if diaf > 27:
+            diaf = 27
+        mesf = int(producto[-1].Fecha.strftime('%m'))
+        cont = 0
+        cont2 = 0
+        for venta in producto:
+            if int(venta.Fecha.strftime('%m')) == mesf and int(venta.Fecha.strftime('%d')) < diaf:
+                cont += venta.Cantidad
+            elif int(venta.Fecha.strftime('%m')) == mesf-1 and int(venta.Fecha.strftime('%m')) < diaf-1:
+                cont2 += venta.Cantidad
+        productos.append([cont, cont2])
+    print(productos)
+    for i in range(len(productos)):
+        relacion.append(((productos[i][1]-productos[i][0])/abs(productos[i][0]))*100)
+    print(relacion)
+    for i in  range (len(relacion)):
+        if relacion[i] > 0:
+            ret.append("El producto %s ha tenido una mejora del %.2f %s  con respecto al mes anterior" % (names[i], relacion[i], '%'))
+        else:
+            ret.append("El producto %s ha bajado su rendimiento un %.2f %s  con respecto al mes anterior" % (names[i], relacion[i], '%'))
+    return(ret)
 
 
 def Opciones(request):
@@ -172,6 +377,7 @@ def Welcome(request):
 
     return render(request, "Welcome.html")
 
+
 def get_data(request):
     data = {"sales":100,
             "customers":10,
@@ -188,7 +394,6 @@ def test(request):
     for id_p in Productos:
         names.append((Producto.objects.filter(id=id_p)).values()[0]['Nombre'])
     
-    print(names)
     
     for producto in Productos:
         (query.append(Venta.objects.filter(Producto_id = producto).order_by('Fecha')))
@@ -200,7 +405,6 @@ def test(request):
         for V in producto:
             labels[index].append(V.Fecha.strftime('%m/%d/%y'))
             data[index].append(V.Cantidad)
-    print(names)
     return render(request, 'test.html', {'labels': labels, 'data': data, 'names': names, 'n': len(names), 'number':list(range(0, len(names)))})
 
 
@@ -267,21 +471,43 @@ def actualizar(request, nombre):
 
 
 def Gmod(request):
-    #global login_check
+    global login_check
     global tipo
-    #if login_check==False:
-     #   return redirect('Welcome')
+    global fecha
+    if login_check==False:
+        return redirect('Welcome')
     if request.method == "POST":
         tipo = request.POST["fecha"]
+        fecha = request.POST["fechaini"]
         try:
             Tipo_data = Gop.objects.get(id=1)
             Tipo_data.timestep=tipo
-            Tipo_data.save(update_fields =['timestep'])
+            Tipo_data.Fecha=fecha
+            Tipo_data.save(update_fields =['timestep','Fecha'])
         except:
             data = Gop(id=1, timestep=tipo)
             data.save()
         return redirect('Graficas')
     return render(request, 'Gmod.html')
+
+
+def Tmood(request):
+    global login_check
+    global tipo
+    global fecha
+    if login_check==False:
+        return redirect('Welcome')
+    if request.method == "POST":
+        mes = request.POST["fecha"]
+        try:
+            Tipo_data = Gop.objects.get(id=1)
+            Tipo_data.mes=mes
+            Tipo_data.save(update_fields =['mes'])
+        except:
+            data = Gop(id=1, timestep=tipo)
+            data.save()
+        return redirect('Tendencias')
+    return render(request, 'Tmood.html')
 
 
 def eliminacionProducto(request, nombre):

@@ -13,12 +13,15 @@
         <h3 class="add_title">Filtros de las graficas</h3>
         <form method="post">
             {% csrf_token %}
+            <p class="form-sub">Tiempo de graficas</p>
             <select name="fecha" id="format">
                 <option selected disabled>Elija el tiempo de las graficas</option>
                 <option value="dia">Dia</option>
                 <option value="mes">Mes</option>
                 <option value="año">Año</option>
             </select>
+            <p class="form-sub">Fecha Inicial</p>
+            <input type="datetime-local" name="fechaini">
             <input class="send" type="submit" name="submit">
         </form>
     </div>

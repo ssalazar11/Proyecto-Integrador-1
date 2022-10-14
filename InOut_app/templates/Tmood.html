@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+</head>
+<body>
+    {% block content %}
+    <div class="agregar">
+        <h3 class="add_title">Filtros de Tendencias</h3>
+        <form method="post">
+            {% csrf_token %}
+            <p class="form-sub">Ingrese mes de referencia</p>
+            <select name="fecha" id="format">
+                <option selected disabled>Elija mes</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+            <input class="send" type="submit" name="submit">
+        </form>
+    </div>
+    {% endblock %}
+</body>
+</html>

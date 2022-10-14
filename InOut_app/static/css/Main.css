@@ -285,12 +285,33 @@ form > label{
     gap: 20px;
 }
 
+.aref{
+    display: inline-block;
+}
+
 .ten_con{
+    display: flex;
     width: 90%;
     height: 100px;
-    background-color: gray;
+    background-color: rgba(53, 52, 52, 1);
     border-radius: 5px;
+    margin-top: 20px;
+   
+}
+
+.form-sub{
+    color:white;
+    margin-bottom: 10px;
     text-align: center;
+}
+
+.tend-text{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    margin: 25px 0px 0px 10px;
+    text-align: left;
+    font-weight: bold;
+    color:rgb(207, 207, 207);
 }
 
 

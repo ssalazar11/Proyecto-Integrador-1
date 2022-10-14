@@ -36,7 +36,8 @@ class Usuario(models.Model):
 
 class Gop(models.Model):
     timestep = models.CharField(max_length=60)
-
+    Fecha = models.DateTimeField()
+    mes = models.CharField(max_length=60)
 
 
 """

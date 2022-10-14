@@ -6,14 +6,23 @@
     <header>
         <h1 id="TituloSeccion">Tendencias</h1>
     </header>
+
     <div id="GridProductos">
         <h2 id="Pro-Title">Tendencias de productos</h2>
         <hr/>
+        <a class = 'aref' href="{% url 'Tmood' %}"> <div class="agregar_prod" id="margen_top"><p class="agregar-font">Filtros</p> </div></a> 
         <div id="tendencias">
-        <div class= "ten_con"> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse quis consequatur optio quo veritatis exercitationem iusto error natus commodi dolorum cumque corrupti quia accusantium voluptates modi odio, sapiente quidem iste.</p></div>
-        <div class= "ten_con"> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse quis consequatur optio quo veritatis exercitationem iusto error natus commodi dolorum cumque corrupti quia accusantium voluptates modi odio, sapiente quidem iste.</p></div>
-        <div class= "ten_con"> <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse quis consequatur optio quo veritatis exercitationem iusto error natus commodi dolorum cumque corrupti quia accusantium voluptates modi odio, sapiente quidem iste.</p></div>
-        </div>
+        {% for res in horas %}
+        <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
+        {% endfor %}
+        {% for res in compara %}
+        <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
+        {% endfor %}
+        {% for res in horas2 %}
+        <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
+        {% endfor %}
+        <div class= "ten_con"> <p class="tend-text">{{meses}}</p></div>
+    </div>
     </div>
 </div>
 {% endblock %}

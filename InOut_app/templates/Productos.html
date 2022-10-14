@@ -34,14 +34,18 @@
                 </div>
                 <div id="Pro-Items">
                     {% for producto in productos.all %}
+                    
                     <div class="Item">
+                        <a href="{% url 'pind' producto.id%}" style="color: inherit;">
                         <h3 class="title">{{producto.Nombre}}</h3>
                         <div class = "div_img">
                         <img class="product" src="{{MEDIA_URL}}{{producto.Imagen}}">
                         </div>
                         <br />
                         <p class="Cantidad">{{producto.Cantidad}}</p>
+                        </a>
                     </div>
+                    
                     {% endfor %}
                 </div>
             </div>

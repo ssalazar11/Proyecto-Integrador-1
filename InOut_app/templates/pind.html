@@ -2,31 +2,33 @@
 {% load static %}
 
     {% block content %}
-        <div>
-            <header>
-                <h1 id="TituloSeccion">Producto</h1>
-            </header>
+    <div>
+        <header>
+            <h1 id="TituloSeccion">Producto</h1>
+        </header>
+        <div id="pind_global">
             <div id="pind">
-                <img id="ind-img"src="../static/images/Pan.png">
+                <img id="ind-img"src="{{MEDIA_URL}}{{producto.Imagen}}">
                 <div id="pind2">
-               <h2 id="Pro-Title">nombre</h2>
-                <hr id ="hrr2"/>
-                <h3 class="indh">Cantidad: 30</h3>
-                <h3 class="indh">Precio: 30</h3>
-               </div>
-               
+                    <h2 id="Pro-Title">{{producto.Nombre}}</h2>
+                    <hr id ="hrr2"/>
+                    <h3 class="indh">Cantidad: {{producto.Cantidad}}</h3>
+                    <h3 class="indh">Precio: {{producto.Precio}}</h3>
+                </div>
             </div>
+            
             <div id="flex-graf">
-            <h1 id="GrafInd">Grafica</h1>
-            <div class="grafind2" style="width: 800px;">
-                <canvas id="myChartind"></canvas>
+                <h1 id="GrafInd">Grafica</h1>
+                <div class="grafind2" style="width: 1000px;">
+                    <canvas id="myChartind"></canvas>
+                </div>
+                <div class="Art-opc2">
+                    <a class = 'aref' href="{% url 'Gmod' %}"> <div class="agregar_prod" id="margen_top"><p class="agregar-font">Filtros</p> </div></a> 
+                    <a class = 'aref' href="{% url 'Reset' %}"> <div class="agregar_prod" id="margen_top" ><p class="agregar-font">Reset</p> </div></a> 
+                </div>
             </div>
-            <div class="Art-opc">
-                <a class = 'aref' href="{% url 'Gmod' %}"> <div class="agregar_prod" id="margen_top"><p class="agregar-font">Filtros</p> </div></a> 
-                <a class = 'aref' href="{% url 'Reset' %}"> <div class="agregar_prod" id="margen_top" ><p class="agregar-font">Reset</p> </div></a> 
-            </div>
-           
         </div>
+    </div>
 <script>
     var charts = [] 
     const ctx = document.getElementById('myChartind').getContext('2d');

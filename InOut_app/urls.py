@@ -27,4 +27,5 @@ urlpatterns = [
     path('Reset/', views.Reset, name="Reset"),
     path('Tmood/', views.Tmood, name="Tmood"),
     path('pind/', views.pind, name="pind"),
+    path('pind/<str:id_obj>', views.pind, name="pind"),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

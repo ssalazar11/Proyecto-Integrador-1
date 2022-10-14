@@ -18,9 +18,7 @@
         <header>
             <a href="{% url 'Welcome' %}"><h1>InOut</h1></a>
         </header>
-        {% for message in messages %}
-        <span style="color:red;">{{message}} </span>
-        {% endfor %}
+
         <div class="agregar">
             <h3 class="add_title">Iniciar Sesión</h3>
             <form method="post">      
@@ -33,6 +31,9 @@
             <div id="container">
                 <a href="{% url 'Registro' %}"><button id="registro">Registrate</button></a>
             </div>
+            {% for message in messages %}
+            <p style="color:red; text-align: center; margin-top: 20px;">{{message}} </p>
+            {% endfor %}
         </div>
     </body>
 </html>

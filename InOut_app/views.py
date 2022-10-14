@@ -378,17 +378,20 @@ def Welcome(request):
     return render(request, "Welcome.html")
 
 
-def pind(request):
+def pind(request, id_obj):
+    global login_check
+    if login_check==False:
+        return redirect('Welcome')
     query = []
     labels = []
     data = []
-    p = Producto.objects.filter(id=8)
+    p = Producto.objects.filter(id=id_obj)
     name = p[0].Nombre
-    query.append(Venta.objects.filter(Producto_id = 8).order_by('Fecha'))
+    query.append(Venta.objects.filter(Producto_id = id_obj).order_by('Fecha'))
     filtrado = filter_time(query)
     labels = filtrado[0]    
     data = filtrado[1]
-    return render(request, "pind.html", {'labels': labels[0], 'data': data[0], 'name': name})
+    return render(request, "pind.html", {'labels': labels[0], 'data': data[0], 'producto': p[0]})
 
 
 def get_data(request):

@@ -315,15 +315,33 @@ form > label{
 }
 
 #pind{
-    margin-top: 20px;
+    margin-top: 80px;
     margin-left: 50px;
+    margin-bottom: 40px;
     display: flex;
+}
+
+#error_log{
+    color:red;
 }
 
 #pind2{
     margin-left: 20px;
     display: flex;
     flex-direction: column;
+}
+
+.Art-opc2{
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+}
+
+#pind_global{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #hrr2{

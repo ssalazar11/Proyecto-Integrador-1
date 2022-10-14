@@ -314,6 +314,46 @@ form > label{
     color:rgb(207, 207, 207);
 }
 
+#pind{
+    margin-top: 20px;
+    margin-left: 50px;
+    display: flex;
+}
 
+#pind2{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#hrr2{
+    width: 600px;
+    margin-top: 0px;
+}
+
+#GrafInd{
+    margin: 30px 0px 0px 0px;
+    height: 60px;
+    position: relative;
+    top: 6px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+.indh{
+    margin-left: 15px;
+}
+
+#ind-img{
+    width: 500px;
+}
+
+
+#flex-graf{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 /* GRAFICAS */
 

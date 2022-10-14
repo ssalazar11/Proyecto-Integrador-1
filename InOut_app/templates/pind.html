@@ -1,0 +1,95 @@
+{% extends "Main.html" %}
+{% load static %}
+
+    {% block content %}
+        <div>
+            <header>
+                <h1 id="TituloSeccion">Producto</h1>
+            </header>
+            <div id="pind">
+                <img id="ind-img"src="../static/images/Pan.png">
+                <div id="pind2">
+               <h2 id="Pro-Title">nombre</h2>
+                <hr id ="hrr2"/>
+                <h3 class="indh">Cantidad: 30</h3>
+                <h3 class="indh">Precio: 30</h3>
+               </div>
+               
+            </div>
+            <div id="flex-graf">
+            <h1 id="GrafInd">Grafica</h1>
+            <div class="grafind2" style="width: 800px;">
+                <canvas id="myChartind"></canvas>
+            </div>
+            <div class="Art-opc">
+                <a class = 'aref' href="{% url 'Gmod' %}"> <div class="agregar_prod" id="margen_top"><p class="agregar-font">Filtros</p> </div></a> 
+                <a class = 'aref' href="{% url 'Reset' %}"> <div class="agregar_prod" id="margen_top" ><p class="agregar-font">Reset</p> </div></a> 
+            </div>
+           
+        </div>
+<script>
+    var charts = [] 
+    const ctx = document.getElementById('myChartind').getContext('2d');
+    nombre = '{{name}}'
+    const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{labels|safe}},
+            datasets: [{
+                label: 'Ventas ' + nombre,
+                data: {{data|safe}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderColor:"black",
+                lineTension: 0.6,
+                pointBackgroundColor:"yellow",
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    //max:100,
+                    //min:0,
+                    beginAtZero: true,
+                    title: {
+                        font: {
+                            size: 15, 
+                        },
+                        color: "black",
+                        display: true,
+                            text: 'Ventas'
+                    }
+                },
+                x:{
+                    title: {
+                        font: {
+                            size: 15, 
+                        },
+                        color: "black",
+                        display: true,
+                        text: 'Fechas'
+                    }
+                }
+                
+            }
+        }
+    });
+    charts.push(myChart)
+    console.log(charts)
+    </script>
+    {% endblock %}

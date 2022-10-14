@@ -26,4 +26,5 @@ urlpatterns = [
     path('Gmod/', views.Gmod, name="Gmod"),
     path('Reset/', views.Reset, name="Reset"),
     path('Tmood/', views.Tmood, name="Tmood"),
+    path('pind/', views.pind, name="pind"),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

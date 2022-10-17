@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Producto
+from .models import Producto, Venta
 from django import forms
 
 class Deleteform(forms.Form):
@@ -9,8 +9,13 @@ class Deleteform(forms.Form):
 class productoForm(ModelForm):
     class Meta:
         model = Producto
-        fields = {'Nombre','Cantidad','Precio'}
+        fields = {'Nombre','Cantidad','Precio','Imagen'}
 
+
+class VentaForm(ModelForm):
+    class Meta:
+        model = Venta
+        fields = {'Producto','Cantidad','Fecha','Precio', 'id'}
 
 def actualizarProducto(producto,cantidad):
     target = Producto.objects.get(Nombre=producto)

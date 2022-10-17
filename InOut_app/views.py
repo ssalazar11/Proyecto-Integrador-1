@@ -6,7 +6,7 @@ import datetime
 from InOut_app import logic, models
 from collections import OrderedDict
 from django.urls import reverse
-from .forms import productoForm, Deleteform, actualizarProducto
+from .forms import productoForm, Deleteform, actualizarProducto, VentaForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
@@ -433,7 +433,21 @@ def registroProducto(request):
     form=productoForm()
     context={'form':form}
     if request.method == 'POST':
-        form=productoForm(request.POST)
+        form=productoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('Productos')
+    return render(request, 'agregar.html', context)
+
+
+def AgregarVenta(request):
+    global login_check
+    if login_check==False:
+        return redirect('Welcome')
+    form=VentaForm()
+    context={'form':form}
+    if request.method == 'POST':
+        form=VentaForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('Productos')

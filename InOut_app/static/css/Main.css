@@ -32,6 +32,7 @@ nav{
 }
 
 #nav-title{
+    display: flex;
     box-shadow: -3px 5px 7px -3px black ;
     height: 80px;
 }

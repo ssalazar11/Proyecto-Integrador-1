@@ -1,2 +1,46 @@
 {% extends "Main.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/usuario.css' %}">
+</head>
+<div>
+    <header>
+        <h1 id="TituloSeccion">
+            Usuario
+        </h1>
+    </header>
+</div>
+<div>
+    {% for info in datos %}
+    <table>
+        <tr>
+            <td>
+            {{info.nombre}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            {{info.apellido}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+            {{info.usuario}}
+        </td>
+        </tr>
+        <tr>
+            <td>
+            {{info.correo}}
+            </td> 
+        </tr>
+        <tr>
+            <td>
+            {{info.clave}}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
 {% load static %}

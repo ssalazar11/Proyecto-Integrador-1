@@ -151,10 +151,12 @@ def Home(request):
     return render(request, "Home.html", {"productos":productos})
 
 
-def Usuario(request):
+def usuario(request):
     if not request.user.is_authenticated:
         return redirect('welcome')
-    return render(request, "Usuario.html")
+    nombreUsuario=request.user
+    datos=Usuario.objects.filter(usuario=nombreUsuario)
+    return render(request, "Usuario.html", {'datos':datos})
 
 def Comparar(request):
     global current_product

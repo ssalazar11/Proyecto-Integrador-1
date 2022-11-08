@@ -99,8 +99,21 @@ header{
 
 }
 
+.div_img{
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#t-TiempoDia{
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px ;
+}
+
 .product{
     width:350px;
+    max-height: 300px;
 }
 
 .ItemDestacado{
@@ -140,6 +153,7 @@ header{
     margin: 0 50px 0 50px;
     justify-content: center;
     text-align: center;
+    height: 450px;
 }
 
 .Cantidad{
@@ -292,12 +306,20 @@ form > label{
 
 .ten_con{
     display: flex;
-    width: 90%;
+    width: 1300px;
     height: 100px;
     background-color: rgba(53, 52, 52, 1);
     border-radius: 5px;
     margin-top: 20px;
    
+}
+
+.Sub-title{
+    margin-bottom: 30px ;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 36px;
+    color: #4f4e4d;
 }
 
 .form-sub{
@@ -376,3 +398,6 @@ form > label{
 }
 /* GRAFICAS */
 
+.Sub-container{
+    width: 1400px;
+}

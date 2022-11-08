@@ -12,17 +12,107 @@
         <hr/>
         <a class = 'aref' href="{% url 'Tmood' %}"> <div class="agregar_prod" id="margen_top"><p class="agregar-font">Filtros</p> </div></a> 
         <div id="tendencias">
-        {% for res in horas %}
-        <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
-        {% endfor %}
-        {% for res in compara %}
-        <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
-        {% endfor %}
-        {% for res in horas2 %}
-        <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
-        {% endfor %}
-        <div class= "ten_con"> <p class="tend-text">{{meses}}</p></div>
-    </div>
+            <div class="Sub-container">
+                <h1 class="Sub-title" id="T-H">Tendencia Horas</h1>
+            </div>
+            <div class="Sub-ten" id="D-H">
+                {% for res in horas %}
+                <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
+                {% endfor %}
+            </div>
+            <div class="Sub-container">
+                <h1 class="Sub-title" id="T-H2">Tendencia Horas filtradas</h1>
+            </div>
+            <div class="Sub-ten" id="D-H2">
+                
+                {% for res in horas2 %}
+                <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
+                {% endfor %}
+            </div>
+            <div class="Sub-container">
+                <h1 class="Sub-title" id="T-P">Mejores Productos</h1>
+            </div>
+            <div class="Sub-ten" id="D-P">
+                {% for res in compara %}
+                <div class= "ten_con"> <p class="tend-text">{{res}}</p></div>
+                {% endfor %}
+            </div>
+            <div class="Sub-container">
+                <h1 class="Sub-title" id="T-M">Tendencia Mes</h1>
+            </div>
+            <div class="Sub-ten" id="D-M">
+                <div class= "ten_con"> <p class="tend-text">{{meses}}</p></div>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    console.log("holaaa")
+    const btn1 = document.getElementById("T-H")
+    const btn2 = document.getElementById("T-H2")
+    const btn3 = document.getElementById("T-P")
+    const btn4 = document.getElementById("T-M")
+    const div1 = document.getElementById("D-H")
+    const div2 = document.getElementById("D-H2")
+    const div3 = document.getElementById("D-P")
+    const div4 = document.getElementById("D-M")
+
+    btn1.onclick = function(){
+        if(btn1.style.color == "black"){
+            btn1.style.color = "#4f4e4d";
+        }else{
+            btn1.style.color = "black"
+        }
+        if(div1.style.display == "none"){
+            div1.style.display = "block";
+        }else{
+            div1.style.display = "none";
+        }
+
+    }
+
+    btn2.onclick = function(){
+        if(btn2.style.color == "black"){
+            btn2.style.color = "#4f4e4d";
+        }else{
+            btn2.style.color = "black"
+        }
+        if(div2.style.display == "none"){
+            div2.style.display = "block";
+        }else{
+            div2.style.display = "none";
+        }
+
+    }
+
+    btn3.onclick = function(){
+        if(btn3.style.color == "black"){
+            btn3.style.color = "#4f4e4d";
+        }else{
+            btn3.style.color = "black"
+        }
+        if(div3.style.display == "none"){
+            div3.style.display = "block";
+        }else{
+            div3.style.display = "none";
+        }
+
+    }
+
+    btn4.onclick = function(){
+        if(btn4.style.color == "black"){
+            btn4.style.color = "#4f4e4d";
+        }else{
+            btn4.style.color = "black"
+        }
+        if(div4.style.display == "none"){
+            div4.style.display = "block";
+            
+        }else{
+            div4.style.display = "none";
+        }
+
+    }
+</script>
 {% endblock %}

@@ -9,8 +9,9 @@ from django.urls import reverse
 from .forms import productoForm, Deleteform, actualizarProducto, VentaForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
-login_check = False
 #tipo = "mes"
 #fecha = 'nulo'
 #mes = 6
@@ -91,9 +92,8 @@ def filter_time(query):
     
 
 def Reset(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     Tipo_data = Gop.objects.get(id=1)
     Tipo_data.timestep='mes'
     Tipo_data.Fecha=datetime.datetime(1990,1,1)
@@ -109,33 +109,24 @@ def Registro(request):
         correo = request.POST['correo']
         clave = request.POST['clave']
 
-        if logic.verificarUsuario(usuario):
-            messages.info(request,"Usuario ya se encuentra registrado, por favor selecciona otro ó inicia sesión")
-        elif logic.verificarCorreo(correo):
-            messages.info(request,"Correo ya se encuentra registrado, por favor selecciona otro ó inicia sesión")
-        else:
-            agregar = models.Usuario(nombre = nombre, apellido= apellido, usuario=usuario, correo=correo,clave=clave)
-            agregar.save()
-            return Home(request)
-
+        user = User.objects.create_user(usuario, correo, clave)
+        user.first_name = nombre
+        user.last_name = apellido
+        user.save()
+        return render(request, "welcome.html")
     return render(request, "registro.html")
 
 def Ingreso(request):
-    global login_check
-    if login_check==True:
+    if  request.user.is_authenticated:
         return redirect('Productos')
-
     if request.method == "POST":
-        
         usuario = request.POST['usuario']
         clave = request.POST['clave']
-
-        try:
-            informacion = models.Usuario.objects.get(usuario= usuario, clave=clave)
-            login_check = True
+        user = authenticate(request, username = usuario, password = clave)
+        if user is not None:
+            login(request, user)
             return redirect('Productos')
-
-        except models.Usuario.DoesNotExist as e:
+        else:
             messages.info(request, "Correo y/o contraseña incorrectos")
 
     return render(request, "Ingreso.html")
@@ -144,30 +135,26 @@ def Ingreso(request):
 
 
 def Home(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     productos =  Producto.objects
     return render(request, "Home.html", {"productos":productos})
 
 
 def Usuario(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     return render(request, "Usuario.html")
 
 def Productos(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
-    productos =  Producto.objects
+    if not request.user.is_authenticated:
+        return redirect('welcome')
+    productos =  Producto.objects.filter(Usuario_id=request.user)
     return render(request, "Productos.html", {"productos":productos})
 
 def graficas(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     labels = []
     data = []
     query = []
@@ -195,9 +182,8 @@ def graficas(request):
     return render(request, 'Graficas.html', {'labels': labels, 'data': data, 'names': names, 'n': len(names), 'number':list(range(0, len(names)))})
 
 def Tendencias(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     opciones = ((Gop.objects.filter(id = 1)))
     mes = int(opciones[0].mes)
     horas2 = tendenciashoras2(mes)
@@ -222,20 +208,27 @@ def tendenciashoras2(mes):
 
     for producto in Productos:
         (query.append(list(Venta.objects.filter(Producto_id = producto).order_by('Fecha'))))
-    
+    print("Holaaaaaaa")
+    print(len(query))
     for producto in query:
         ma = 0
         me = 0
         t = 0
-
+        cont1 = 0
+        cont2 = 0
+        cont3 = 0
         for venta in producto:
+            
             if venta.Fecha.strftime('%H') in mañana and int(venta.Fecha.strftime('%m')) == mes:
+                cont1 += 1
                 ma += venta.Cantidad
             elif venta.Fecha.strftime('%H') in medio and int(venta.Fecha.strftime('%m')) == mes:
+                cont2 += 1
                 me += venta.Cantidad
             elif venta.Fecha.strftime('%H') in tarde and int(venta.Fecha.strftime('%m')) == mes:
+                cont3 += 1
                 t += venta.Cantidad
-        productos.append([ma,me,t])
+        productos.append([ma/(cont1/5),me/(cont2/4),t/(cont3/4)])
     
     print(productos)
     print(names)
@@ -246,9 +239,9 @@ def tendenciashoras2(mes):
         ma.append(i[0])
         me.append(i[1])
         t.append(i[2])
-    ret.append(("El producto mas vendido en las mañanas del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[ma.index(max(ma))],max(ma))))
-    ret.append(("El producto mas vendido al medio dia en el mes de %s fue el %s, con un numero de %s ventas"% (meses[mes], names[me.index(max(me))],max(me))))
-    ret.append(("El producto mas vendido en las tardes del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[t.index(max(t))],max(t))))
+    ret.append(("El producto mas vendido en las mañanas del mes de %s fue el %s, con un promedio de %d ventas" % (meses[mes], names[ma.index(max(ma))],max(ma))))
+    ret.append(("El producto mas vendido al medio dia en el mes de %s fue el %s, con un promedio de %d ventas"% (meses[mes], names[me.index(max(me))],max(me))))
+    ret.append(("El producto mas vendido en las tardes del mes de %s fue el %s, con un promedio de %d ventas" % (meses[mes], names[t.index(max(t))],max(t))))
     return(ret)
         
 
@@ -272,16 +265,22 @@ def tendenciashoras():
         ma = 0
         me = 0
         t = 0
+        cont1 = 0
+        cont2 = 0
+        cont3 = 0
         mes = int(producto[-1].Fecha.strftime('%m'))
         print(mes)
         for venta in producto:
             if venta.Fecha.strftime('%H') in mañana and int(venta.Fecha.strftime('%m')) == mes:
                 ma += venta.Cantidad
+                cont1 += 1
             elif venta.Fecha.strftime('%H') in medio and int(venta.Fecha.strftime('%m')) == mes:
                 me += venta.Cantidad
+                cont2 += 2
             elif venta.Fecha.strftime('%H') in tarde and int(venta.Fecha.strftime('%m')) == mes:
                 t += venta.Cantidad
-        productos.append([ma,me,t])
+                cont3 += 3
+        productos.append([ma/(cont1/5),me/(cont2/4),t/(cont3/4)])
 
     print(productos)
     print(names)
@@ -292,9 +291,9 @@ def tendenciashoras():
         ma.append(i[0])
         me.append(i[1])
         t.append(i[2])
-    ret.append(("El producto mas vendido en las mañanas del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[ma.index(max(ma))],max(ma))))
-    ret.append(("El producto mas vendido al medio dia en el mes de %s fue el %s, con un numero de %s ventas"% (meses[mes], names[me.index(max(me))],max(me))))
-    ret.append(("El producto mas vendido en las tardes del mes de %s fue el %s, con un numero de %s ventas" % (meses[mes], names[t.index(max(t))],max(t))))
+    ret.append(("El producto mas vendido en las mañanas del mes de %s fue el %s, con un promedio de %d ventas" % (meses[mes], names[ma.index(max(ma))],max(ma))))
+    ret.append(("El producto mas vendido al medio dia en el mes de %s fue el %s, con un promedio de %d ventas"% (meses[mes], names[me.index(max(me))],max(me))))
+    ret.append(("El producto mas vendido en las tardes del mes de %s fue el %s, con un promedio de %d ventas" % (meses[mes], names[t.index(max(t))],max(t))))
     return(ret)
 
 
@@ -312,11 +311,14 @@ def tendeciames(mes):
 
     for producto in query:
         cont = 0
+        cont2 = 0
         for venta in producto:
             if int(venta.Fecha.strftime('%m')) == mes:
+                cont2 += 1
                 cont += venta.Cantidad
-        productos.append([cont])
-    return("El producto mas vendido en el mes %s fue el %s con un numero de %s unidades vendidas" %(meses[mes],names[productos.index(max(productos))], max(productos)[0]))
+        print(cont2)
+        productos.append([cont/(cont2/13)])
+    return("El producto mas vendido en el mes %s fue el %s con un promedio de %d unidades vendidas al dia" %(meses[mes],names[productos.index(max(productos))], max(productos)[0]))
 
 
 def mejor():
@@ -361,15 +363,13 @@ def mejor():
 
 
 def Opciones(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     return render(request, "Opciones.html")
 
 def Main(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     return render(request, "Main.html")
 
 
@@ -379,9 +379,8 @@ def Welcome(request):
 
 
 def pind(request, id_obj):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     query = []
     labels = []
     data = []
@@ -427,23 +426,23 @@ def test(request):
 
 
 def registroProducto(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     form=productoForm()
     context={'form':form}
     if request.method == 'POST':
         form=productoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        if form.is_valid():            
+            product = form.save(commit=False)
+            product.Usuario_id=request.user.id
+            product.save()
             return redirect('Productos')
     return render(request, 'agregar.html', context)
 
 
 def AgregarVenta(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     form=VentaForm()
     context={'form':form}
     if request.method == 'POST':
@@ -455,9 +454,8 @@ def AgregarVenta(request):
 
 
 def EliminarItem(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     form=Deleteform()
     context={'form':form}
     if request.method == 'POST':
@@ -469,9 +467,8 @@ def EliminarItem(request):
 
 
 def modificar(request):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     form=Deleteform()
     context={'form':form}
     if request.method == 'POST':
@@ -483,9 +480,8 @@ def modificar(request):
 
 
 def actualizar(request, nombre):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     try:
         productoactualizar = Producto.objects.get(Nombre=nombre)
     except:
@@ -501,11 +497,10 @@ def actualizar(request, nombre):
 
 
 def Gmod(request):
-    global login_check
     global tipo
     global fecha
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     if request.method == "POST":
         tipo = request.POST["fecha"]
         fecha = request.POST["fechaini"]
@@ -522,11 +517,10 @@ def Gmod(request):
 
 
 def Tmood(request):
-    global login_check
     global tipo
     global fecha
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     if request.method == "POST":
         mes = request.POST["fecha"]
         try:
@@ -541,9 +535,8 @@ def Tmood(request):
 
 
 def eliminacionProducto(request, nombre):
-    global login_check
-    if login_check==False:
-        return redirect('Welcome')
+    if not request.user.is_authenticated:
+        return redirect('welcome')
     try:
         productoBorrar=Producto.objects.get(Nombre=nombre)
     except:
@@ -556,7 +549,6 @@ def eliminacionProducto(request, nombre):
 
 
 def logOut_request(request):
-    global login_check
-    login_check = False
+    logout(request)
     return redirect("Welcome")
 

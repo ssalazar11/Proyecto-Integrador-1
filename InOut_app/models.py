@@ -1,11 +1,17 @@
 from distutils.command.upload import upload
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
 
 class Producto(models.Model):
     #Categoria = models.ForeignKey("Categoria", on_delete=models.CASCADE) 
     #Empresa = models.ForeignKey( "Empresa", on_delete=models.CASCADE)
+    Usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
     Nombre = models.CharField(max_length=20)
     Cantidad = models.IntegerField(default=0)
     Precio = models.DecimalField(max_digits=10, decimal_places=2, default= 0.00)

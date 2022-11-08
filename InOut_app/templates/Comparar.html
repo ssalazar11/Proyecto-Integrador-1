@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="agregar">
+    <h3 class="add_title">Ingrese los datos de su producto</h3>
+        <form method="post">      
+            {% csrf_token %}
+            <input type="text" name="nombre" placeholder="Nombre" required></input><br>
+            <button type="submit" class="send">Comparar</button>
+        </form>
+</div>
+{% endblock %}

@@ -11,16 +11,43 @@
                <hr/>
                <div id="items">
                     <div class="ItemDestacado">
-                        <h3 class="title">Mas vendido</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <h3 class="title2">Mas vendido</h3>
+                        <div class="Item">
+                            <a href="{% url 'pind' maxv.id%}" style="color: inherit;">
+                            <h3 class="title">{{maxv.Nombre}}</h3>
+                            <div class = "div_img">
+                            <img class="product" src="{{MEDIA_URL}}{{maxv.Imagen}}">
+                            </div>
+                            <br />
+                            <p class="Cantidad">{{maxv.Cantidad}}</p>
+                            </a>
+                        </div>
                     </div>
                     <div class="ItemDestacado">
-                        <h3 class="title">Mayor Cantidad</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <h3 class="title2">Mayor Cantidad</h3>
+                        <div class="Item">
+                            <a href="{% url 'pind' max.id%}" style="color: inherit;">
+                            <h3 class="title">{{max.Nombre}}</h3>
+                            <div class = "div_img">
+                            <img class="product" src="{{MEDIA_URL}}{{max.Imagen}}">
+                            </div>
+                            <br />
+                            <p class="Cantidad">{{max.Cantidad}}</p>
+                            </a>
+                        </div>
                     </div>
                     <div class="ItemDestacado">
-                        <h3 class="title">Agotandose</h3>
-                        <img class="product" src="{% static 'images/pan.png' %}">
+                        <h3 class="title2">Agotandose</h3>
+                        <div class="Item">
+                            <a href="{% url 'pind' min.id%}" style="color: inherit;">
+                            <h3 class="title">{{min.Nombre}}</h3>
+                            <div class = "div_img">
+                            <img class="product" src="{{MEDIA_URL}}{{min.Imagen}}">
+                            </div>
+                            <br />
+                            <p class="Cantidad">{{min.Cantidad}}</p>
+                            </a>
+                        </div>
                     </div>
                </div>
             </div>

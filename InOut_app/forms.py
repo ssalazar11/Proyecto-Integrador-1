@@ -21,3 +21,8 @@ def actualizarProducto(producto,cantidad):
     target = Producto.objects.get(Nombre=producto)
     target.Cantidad = cantidad
     target.save(update_fields =['Cantidad'])
+
+def actualizarComp(producto,comp):
+    target = Producto.objects.get(Nombre=producto)
+    target.Comp = comp
+    target.save(update_fields =['Comp'])
